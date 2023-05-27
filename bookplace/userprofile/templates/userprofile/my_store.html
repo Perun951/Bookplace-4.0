@@ -1,0 +1,100 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Magazinul meu
+{% endblock %}
+
+{% block content %}
+
+<div class="card mx-auto rounded-4 shadow p-3 mb-5 bg-white rounded border-0" style="background-color: white; width: 95%; height: 90%; margin-bottom: 5%;  margin-top: 80px; ">
+    <h5 class="card-title mx-auto" style="margin-top: 50px;"><font size="16">Cartile mele</font></h5>
+    <div class="row justify-content-center">
+        <a href="{% url 'add_product' %}" class="col-2 text-light d-flex justify-content-end" style="text-decoration: none;margin-bottom: 30px;">
+            <button class="btn btn-success mx-auto shadow rounded-4" type="button" style="width: 150px; height: 100%; margin-top: 8px;">
+                <h5 class="d-flex align-items-center"><i class="fa-solid fa-plus"></i>&nbsp;Adauga carte</h5>
+            </button>
+        </a>
+        <a href="{% url 'wishlist' %}" class="col-2 text-light d-flex justify-content-start" style="text-decoration: none;margin-bottom: 30px;">
+            <button class="btn btn-success mx-auto shadow rounded-4" type="button" style="width: 150px; height: 100%; margin-top: 8px;">
+                <h5 class="d-flex align-items-center"><i class="fa-regular fa-heart"></i>&nbsp;Carti favorite</h5>
+            </button>
+        </a>
+    </div>
+    <hr>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success mx-auto" role="alert" style="height: 10%; width: 300px;margin-top: 14px;">
+                <span class="d-flex p-2 justify-content-center">{{ message }}</span>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if products %}
+        <div class="d-flex  align-items-center" style="margin-top: 90px;">
+            <div class="d-flex justify-content-center flex-row flex-wrap gap-4  " style="margin-bottom: 5%;margin-left: 2%;margin-right: 2%;">
+                {% for product in products_list %}
+                <div  style="margin-top: -50px;" align="center"> 
+                    <div class="card shadow mb-5 bg-white rounded border-0 rounded-4" style="max-width: 400px ;min-width: 400px; min-height: 700px;max-height: 700px;" >
+                        <div class="p-3">
+                            <a href="{% url 'edit_product' product.id %}">
+                                <div class="image p-1">  
+                                    <img class="rounded-4" id="corner" src="{{ product.get_thumbnail }}" width="350px" height="350px" alt="Image of {{ product.title }}">
+                                </div>
+                            </a>
+                            <a href="{% url 'edit_product' product.id %}" class="text-dark" style="text-decoration:none">
+                                <div class="card-text" align="center" style="min-height: 60px;">
+                                    <p><strong><h5>{{ product.title }}</h5></strong></p>
+                                </div>
+                            </a>
+                            <div class="card-body " style="background-color: white;">  
+                                    <a href="{% url 'edit_product' product.id %}" style="color: black; text-decoration: none;max-width: 230px;max-height: 100px;">
+                                            <p class="card-text text-success" align="left"><i class="fa-solid fa-user"></i>&nbsp;{{product.author}}</p>
+                                            <p align="left"><span class="text-success"><i class="fa-solid fa-star"></i>&nbsp;{{ product.get_rating }}/10 [{{ product.reviews.count }}]</span></p> 
+                                            <p class="card-text text-success" align="left"><i class="fa-solid fa-globe"></i>&nbsp;{{product.limba}}</p>
+                                            <p class="card-text text-success" align="left"><i class="fa-solid fa-at"></i>&nbsp;{% firstof product.user.get_full_name product.user.username %}</p>
+                                            <!-- <p align="left" class="card-text text-success">{{product.downloads}}&nbsp;<i class="fa-sharp fa-solid fa-download"></i></p> -->
+                                    </a>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="card-footer rounded-bottom-4 " style="width: 400px;">
+                                <p><strong>Status: {{ product.get_status_display }}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="mx-auto">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if products_list.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link text-success" href="?page1" style="text-decoration: none;">&laquo; </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-success" href="?page{{ products_list.previous_page_number }}" style="text-decoration: none;">&#8249;</a>
+                    </li>
+                    {% endif %}
+                    {% for i in nums %}
+                        <li class="page-item">
+                            <a class="page-link text-success" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if products_list.has_next %}
+                    <li class="page-item">
+                        <a class="page-link text-success" href="?page={{ products_list.next_page_number }}" style="text-decoration: none;">&#8250;</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-success" href="?page={{ products_list.paginator.num_pages }}" style="text-decoration: none;">&raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    {% else %}
+        <p class="card-title text-danger" style="margin-top: 10px;align-self: center;"><font size="6">Nu ai incarcat carti pana acum!</font></p>
+    {% endif %}
+</div>
+{% endblock %}
