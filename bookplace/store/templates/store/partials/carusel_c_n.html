@@ -1,11 +1,54 @@
 {% load static %}
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+
+<div class="carousel relative">
+  <!-- Slides -->
+  <div class="carousel-inner relative overflow-hidden">
+    <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
+    <div class="carousel-item absolute opacity-0" style="height:50vh;">
+      <img class="object-cover h-full w-full" src="{% static '/images/3.jpg' %}" alt="Slide 1">
+      <div class="carousel-caption">
+        <h3 class="text-white">Slide 1</h3>
+        <p class="text-white">Caption for Slide 1</p>
+      </div>
+    </div>
+    <label for="carousel-3" class="carousel-control absolute opacity-0 h-10 w-10 bg-gray-900 rounded-full cursor-pointer hidden md:flex">
+      <svg class="carousel-control-next-icon" viewBox="0 0 16 16">
+        <path d="M1.293 4.293L8 11.586l6.707-6.293a.999.999 0 1 0-1.414-1.414L8 9.586 2.707 4.293a.999.999 0 1 0-1.414 1.414z">
+        </path>
+      </svg>
+    </label>
+    <!-- Add more slides here -->
+  </div>
+
+  <!-- Navigation buttons -->
+  <div class="carousel-nav">
+    <label for="carousel-1" class="carousel-bullet">•</label>
+    <!-- Add more slide selection buttons here -->
+  </div>
+
+  <!-- Slide navigation buttons -->
+  <div class="carousel-controls absolute top-0 left-0 right-0 flex justify-between items-center px-4">
+    <label for="carousel-1" class="prev control cursor-pointer hidden md:flex">
+      <svg class="carousel-control-prev-icon" viewBox="0 0 16 16">
+        <path d="M10.293 4.293L4.586 10l5.707 5.707a.999.999 0 1 1-1.414 1.414L2.586 10 9.293 3.293a.999.999 0 0 1 1.414 0c.39.39.39 1.024 0 1.414z"></path>
+      </svg>
+    </label>
+    <label for="carousel-3" class="next control cursor-pointer hidden md:flex">
+      <svg class="carousel-control-next-icon" viewBox="0 0 16 16">
+        <path d="M1.293 4.293L8 11.586l6.707-6.293a.999.999 0 1 0-1.414-1.414L8 9.586 2.707 4.293a.999.999 0 1 0-1.414 1.414z"></path>
+      </svg>
+    </label>
+  </div>
+</div>
+
+
+<!-- <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
     <!-- <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button> -->
-  </div>
+  <!-- </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
       <a href="{% url 'recomandari' %}">
@@ -40,4 +83,4 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>
+</div> -->

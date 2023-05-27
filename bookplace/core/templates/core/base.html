@@ -20,15 +20,12 @@
         <style>body{font-family: 'Poppins';}</style>
     </head>
     <body class="bg-gray-200">
-        <!-- component -->
-        <header class="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02 h-[50px]">
+        <header class="relative z-50 header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02 h-[50px]">
             <h1 class="w-3/12">
                 <a class="navbar-brand text-lime-600" style="font-family:'Dancing Script'" href="/">
                     <i class="fa-solid fa-book-bookmark fa-2x"></i> <b style="font-size: 30px;">BookPlace</b>
                 </a>
             </h1>
-
-            <!-- navigation -->
             <nav class="nav font-semibold text-lg">
                     <form role="search" method="get" action="/search/">
                         <div class="relative text-lime-600">
@@ -41,8 +38,6 @@
                         </div>
                     </form>
             </nav>
-
-            <!-- buttons --->
             <div class="w-3/12 flex justify-end gap-5">
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'myaccount' %}" class="text-lime-600">
@@ -66,6 +61,7 @@
                   <i class="fa-solid fa-bars fa-2x"></i>
                 </button>
             </div>
+            
         </header>
         {% block content %}
         {% endblock %}
